@@ -143,7 +143,7 @@ try:
     df = spark.sql("SELECT * FROM default.telco_churn").toPandas()
 except:
   print("Hive table has not been created")
-  df = pd.read_csv(os.path.join(data_dir, 'raw', 'WA_Fn-UseC_-Telco-Customer-Churn.csv'))
+  df = pd.read_csv("/home/cdsw/raw/WA_Fn-UseC_-Telco-Customer-Churn-.csv")
 
 # Clean and shape the data from lr and LIME
 df = df.replace(r'^\s$', np.nan, regex=True).dropna().reset_index()
