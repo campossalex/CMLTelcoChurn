@@ -163,7 +163,7 @@ X = ce.fit_transform(data)
 y = labels.values
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 ct = ColumnTransformer(
-    [('ohe', OneHotEncoder(), list(ce.cat_columns_ix_.values()))],
+    [('ohe', OneHotEncoder(categories='auto'), list(ce.cat_columns_ix_.values()))],
     remainder='passthrough'
 )
 
