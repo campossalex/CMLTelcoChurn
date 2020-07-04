@@ -31,8 +31,24 @@ We trust that you are familiar with typical data science workflows
 and do not need detailed explanations of the code.
 Notes that are *specific to CML* will be emphasized in **block quotes**.
 
+### CDSW Inteface
+
+Before start create the project and run the labs, let's explore CDSW internface
+
+![ml_create_project_1](images/cdsw_interface_1.png)
+
+You have on the left hand panel:  
+
+* **Projects** - where you create data science projects  
+* **Jobs** - Run and schedule jobs and add dependencies  
+* **Sessions** - Python, Scala or R sessions  
+* **Experiments** - batch experiments  
+* **Models** - build, deploy, and manage models as REST APIs to serve predictions  
+* **Applications** - deploy long-running applications  
+* **Settings** - User, Hadoop Authentication, SSH Keys and permission settings   
+
 ### Create the Project
-In the main CDSW scree, click `New Project`:
+In the main CDSW main page, click `New Project`:
 
 ![ml_create_project_1](images/ml_create_project_1.png)
 
