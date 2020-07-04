@@ -31,38 +31,20 @@ We trust that you are familiar with typical data science workflows
 and do not need detailed explanations of the code.
 Notes that are *specific to CML* will be emphasized in **block quotes**.
 
-### Initialize the Project
-There are a couple of steps needed at the start to configure the Project and Workspace 
-settings so each step will run sucessfully. You **must** run the project bootstrap 
-before running other steps. If you just want to launch the model interpretability 
-application without going through each step manually, then you can also deploy the 
-complete project. 
+### Create the Project
+In the main CDSW scree, click `New Project`:
 
-***Project bootstrap***
+![ml_create_project_1](images/ml_create_project_1.png)
 
-Open the file `0_bootstrap.py` in a normal workbench python3 session. You only need a 
-1 vCPU / 2 GiB instance. Once the session is loaded, click **Run > Run All Lines**. 
-This will file will create an Environment Variable for the project called **STORAGE**, 
-which is the root of default file storage location for the Hive Metastore in the 
-DataLake (e.g. `s3a://my-default-bucket`). It will also upload the data used in the 
-project to `$STORAGE/datalake/data/churn/`. The original file comes as part of this 
-git repo in the `raw` folder.
-  
-***Deploy the Complete Project***
+```
+Pooject Name:       Telco Churn
+Project Visibility: Private
+Git:                https://github.com/campossalex/CMLChurnCDSW
+```
 
-If you just wish build the project artifacts without going through each step manually, 
-run the `8_build_projet.py` file in a python3 session. Again a 1 vCPU / 2 GiB instance 
-will be suffient. This script will: 
-* run the bootstrap
-* then create the Hive Table and import the data
-* deploy the model
-* update the application files to use this new model
-* deploy the application
-* run the model drift simulation
-Once the script has completed you will see the new model and application are now available 
-in the project.
+Click `Create Project`.
 
-## Project Build
+## Labs
 If you want go through each of the steps manually to build and understand how the project 
 works, follow the steps below. There is a lot more detail and explanation/comments in each 
 of the files/notebooks so its worth looking into those. Follow the steps below and you 
