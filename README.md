@@ -31,9 +31,9 @@ We trust that you are familiar with typical data science workflows
 and do not need detailed explanations of the code.
 Notes that are *specific to CML* will be emphasized in **block quotes**.
 
-### CDSW Inteface
+## CDSW Inteface
 
-Before start create the project and run the labs, let's explore CDSW internface
+Before start create the project and run the labs, let's explore CDSW interface:
 
 ![ml_create_project_1](images/cdsw_interface_1.png)
 
@@ -47,37 +47,96 @@ You have on the left hand panel:
 * **Applications** - deploy long-running applications  
 * **Settings** - User, Hadoop Authentication, SSH Keys and permission settings   
 
-### Create the Project
+## Create the Project
 In the main CDSW main page, click `New Project`:
 
 ![ml_create_project_1](images/ml_create_project_1.png)
 
 ```
-Pooject Name:       Telco Churn
-Project Visibility: Private
-Git:                https://github.com/campossalex/CMLChurnCDSW
+Pooject Name:           Telco Churn
+Project Visibility:     Private
+Initial Setup -> Git:   https://github.com/campossalex/CMLTelcoChurn
 ```
 
-Click `Create Project`.
+Click `Create Project`.  
+
+You will see something like this:  
+
+![telco_churn_project_overview](images/telco_churn_project_overview.png)
+
+Each project has following structure:
+
+* **Models** - build, deploy, and manage models as REST APIs to serve predictions  
+* **Jobs** - Run and schedule jobs and add dependencies  
+* **Files** - Project files  
+
+Now it is all set to start labs, but before, let's understand how to open a Workbench session.
+
+From the project main page, click _Open Workbench_ button to.
+
+![telco_churn_project_overview](images/launch_workbench_session_1.png)
+
+Then you can select the options to open a new workbench session:
+
+![telco_churn_project_overview](images/launch_workbench_session_2.png)
+
+1. On the far left is a file browser (note the little ‘refresh’ icon at the top:  )
+2. In the middle is an editor open for files.
+3. On the right is a Session Start tile. You can select following options:  
+    - **Editor**: use a native _Workbench_ or _Jupyter_ editor.
+    - **Engine Kernel**: you can select Python 2, Python 3, Scala or R.
+    - Engine Profile: memory and cpu configuration for the session. This environments 
+  is configured with three profiles: 1 vCPU/2GiB, 1 vCPU/4GiB and 2 vCPU/16GiB.  
+4. By now, select a _Workbench_ editor, _Python 3_ engine and _1 vCPU/2GiB_ profile.
+5. Click _Launch Session_ button.
+6.  This will startup a Python engine and the right hand side will become two tiles. 
+The top one is an output tile and the bottom one (with a red, then green left hand border) is a shell input window.
+
+    ![telco_churn_project_overview](images/run_file_1.png)
+ 
+7. From the left panel, select `0_bootstrap.py` file. This will open the file in the middle panel.
+
+    ![telco_churn_project_overview](images/run_file_2.png)
+
+8. You have two options to execute code. One is select the lines from the file and click from the top menu
+_Run -> Run Line(s)_, or you can run all the lines by click _Run -> Run All_. In this case, run all the lines.
+ 
+    ![telco_churn_project_overview](images/run_file_3.png)
+
+9. The cursor on the left should turn to red and, after a few seconds, you should see output like this:
+
+    ![telco_churn_project_overview](images/run_file_4.png)
+
+10. What’s happening here is that the code in the file is being executed in the console (did you notice the left hand edge turned red?) and now you can see the output in the right hand screen. 
+11. Stop this session. The Stop button is either on the top menu bar (when there’s sufficient room for it):
+
+    ![telco_churn_project_overview](images/run_file_5.png)
+
+12. Or it’s in the the Session drop down (when there’s little room for buttons):
+
+    ![telco_churn_project_overview](images/run_file_6.png)
+    
+13. You can go back to the main project page by clicking _Project_ button located at the top menu.
 
 ## Labs
-If you want go through each of the steps manually to build and understand how the project 
+Go through each of the steps manually to build and understand how the project 
 works, follow the steps below. There is a lot more detail and explanation/comments in each 
 of the files/notebooks so its worth looking into those. Follow the steps below and you 
 will end up with a running application.
 
 ### 0 Bootstrap
-Just to reiterate that you have run the bootstrap for this project before anything else. 
-So make sure you run step 0 first. 
+This step will upload the data used in the project to `$STORAGE/datalake/data/churn/`. 
+The original file comes as part of this git repo in the `raw` folder
 
-Open the file `0_bootstrap.py` in a normal workbench python3 session. You only need a 
-1 CPU / 2 GB instance. Then **Run > Run All Lines**
+
+Open the file `0_bootstrap.py` in a normal Workbench python3 session. You only need a 
+1 CPU / 2 GB instance. Then go to the top menu and click **Run > Run All Lines**
 
 ### 1 Ingest Data
 This script will read in the data csv from the file uploaded to the s3 bucket setup 
 during the bootstrap and create a managed table in Hive. This is all done using Spark.
 
-Open `1_data_ingest.py` in a Workbench session: python3, 1 CPU, 2 GB. Run the file.
+Open the file  `1_data_ingest.py` in a Workbench session: python3, 1 CPU, 2 GB. Run the file.
 
 ### 2 Explore Data
 This is a Jupyter Notebook that does some basic data exploration and visualistaion. It 
@@ -230,27 +289,3 @@ the model would predict for a customer with those data points*
 
 
 ![single_view_2](images/single_view_2.png)
-
-### 7 Model Operations
-The final step is the model operations which consists of [Model Metrics](https://docs.cloudera.com/machine-learning/cloud/model-metrics/topics/ml-enabling-model-metrics.html)
-and [Model Governance](https://docs.cloudera.com/machine-learning/cloud/model-governance/topics/ml-enabling-model-governance.html)
-
-**Model Governance** is setup in the `0_bootstrap.py` script, which writes out the lineage.yml file at
-the start of the project. For the **Model Metrics** open a workbench session (1 vCPU / 2 GiB) and open the
-`7a_ml_ops_simulation.py` file. You need to set the `model_id` number from the model created in step 5 on line
-113. The model number is on the model's main page.
-
-![model_id](images/model_id.png)
-
-`model_id = "95"`
-
-From there, run the file. This goes through a process of simulating an model that drifts over 
-over 1000 calls to the model. The file contains comments with details of how this is done.
-
-In the next step you can interact and display the model metrics. Open a workbench 
-session (1 vCPU / 2 GiB) and open and run the `7b_ml_ops_visual.py` file. Again you 
-need to set the `model_id` number from the model created in step 5 on line 53. 
-The model number is on the model's main page.
-
-![model_accuracy](images/model_accuracy.png)
-
