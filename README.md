@@ -86,7 +86,7 @@ Then you can select the options to open a new workbench session:
     - **Editor**: use a native _Workbench_ or _Jupyter_ editor.
     - **Engine Kernel**: you can select Python 2, Python 3, Scala or R.
     - Engine Profile: memory and cpu configuration for the session. This environments 
-  is configured with three profiles: 1 vCPU/2GiB, 1 vCPU/4GiB and 2 vCPU/16GiB.  
+  is configured with three profiles: 1vCPU/2GiB, 1vCPU/4GiB and 2vCPU/16GiB.  
 4. By now, select a _Workbench_ editor, _Python 3_ engine and _1 vCPU/2GiB_ profile.
 5. Click _Launch Session_ button.
 6.  This will startup a Python engine and the right hand side will become two tiles. 
@@ -118,33 +118,28 @@ _Run -> Run Line(s)_, or you can run all the lines by click _Run -> Run All_. In
     
 13. You can go back to the main project page by clicking _Project_ button located at the top menu.
 
+What we have done executing `0_bootstrap.py` is uploading the data used in the project to `$STORAGE/datalake/data/churn/`. 
+The original file comes as part of this git repo in the `raw` folder
+
 ## Labs
 Go through each of the steps manually to build and understand how the project 
 works, follow the steps below. There is a lot more detail and explanation/comments in each 
 of the files/notebooks so its worth looking into those. Follow the steps below and you 
 will end up with a running application.
 
-### 0 Bootstrap
-This step will upload the data used in the project to `$STORAGE/datalake/data/churn/`. 
-The original file comes as part of this git repo in the `raw` folder
-
-
-Open the file `0_bootstrap.py` in a normal Workbench python3 session. You only need a 
-1 CPU / 2 GB instance. Then go to the top menu and click **Run > Run All Lines**
-
 ### 1 Ingest Data
 This script will read in the data csv from the file uploaded to the s3 bucket setup 
 during the bootstrap and create a managed table in Hive. This is all done using Spark.
 
-Open the file  `1_data_ingest.py` in a Workbench session: python3, 1 CPU, 2 GB. Run the file.
+Open the file  `1_data_ingest.py` in a Workbench session: Python 3, 1vCPU/2GiB. Run all the lines.
 
 ### 2 Explore Data
-This is a Jupyter Notebook that does some basic data exploration and visualistaion. It 
+This is a Jupyter Notebook that does some basic data exploration and visualization. It 
 is to show how this would be part of the data science workflow.
 
 ![data](https://raw.githubusercontent.com/fletchjeff/cml_churn_demo_mlops/master/images/data.png)
 
-Open a Jupyter Notebook session (rather than a work bench): python3, 1 CPU, 2 GB and 
+Open a Jupyter Notebook session (rather than a Workbench): Python 3, 1vCPU/2GiB and 
 open the `2_data_exploration.ipynb` file. 
 
 At the top of the page click **Cells > Run All**.
