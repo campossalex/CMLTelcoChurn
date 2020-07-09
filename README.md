@@ -128,7 +128,7 @@ of the files/notebooks so its worth looking into those. Follow the steps below a
 will end up with a running application.
 
 ### 1 Ingest Data
-This script will read in the data csv from the file uploaded to the s3 bucket setup 
+This script will read in the data csv from the file uploaded to the HDFS setup 
 during the bootstrap and create a managed table in Hive. This is all done using Spark.
 
 Open the file  `1_data_ingest.py` in a Workbench session: Python 3, 1vCPU/2GiB. Run all the lines.
@@ -149,8 +149,8 @@ This is also a Jupyter Notebook to show the process of selecting and building th
 to predict churn. It also shows more details on how the LIME model is created and a bit 
 more on what LIME is actually doing.
 
-Open a Jupyter Notebook session (rather than a work bench): python3, 1 CPU, 2 GB and 
-open the `	3_model_building.ipynb` file. 
+Open a Jupyter Notebook session (rather than a Workbench): python3, 1vCPU/2GiB and 
+open the `3_model_building.ipynb` file. 
 
 At the top of the page click **Cells > Run All**.
 
@@ -166,8 +166,8 @@ There are 2 other ways of running the model training process
 
 The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/topics/ml-creating-a-job.html)**
 feature allows for adhoc, recurring and depend jobs to run specific scripts. To run this model 
-training process as a job, create a new job by going to the Project window and clicking _Jobs >
-New Job_ and entering the following settings:
+training process as a job, create a new job by going to the Project window and clicking **Jobs >
+New Job** and entering the following settings:
 * **Name** : Train Mdoel
 * **Script** : 4_train_models.py
 * **Arguments** : _Leave blank_
@@ -179,7 +179,9 @@ run for that job.
 
 ***2. Experiments***
 
-The other option is running an **[Experiment](https://docs.cloudera.com/machine-learning/cloud/experiments/topics/ml-running-an-experiment.html)**. Experiments run immediately and are used for testing different parameters in a model training process. In this instance it would be use for hyperparameter optimisation. To run an experiment, from the Project window click Experiments > Run Experiment with the following settings.
+The other option is running an **[Experiment](https://docs.cloudera.com/machine-learning/cloud/experiments/topics/ml-running-an-experiment.html)**. 
+Experiments run immediately and are used for testing different parameters in a model training process. In this instance it would be use for hyperparameter 
+optimisation. To run an experiment, from the Project window click **Experiments > Run Experiment** with the following settings.
 * **Script** : 4_train_models.py
 * **Arguments** : 5 lbfgs 100 _(these the cv, solver and max_iter parameters to be passed to 
 LogisticRegressionCV() function)
@@ -235,9 +237,9 @@ from the model Model Overview page.
 
 _**Note: This is important**_
 
-Once the model is deployed, you must disable the additional model authentication feature. In the model settings page, untick **Enable Authentication**.
+Once the model is deployed, go to the _Settings_ tab inside the new deployed model and copy tbe _Access Key_.
 
-![disable_auth](images/disable_auth.png)
+![disable_auth](images/model_access_key_1.png)
 
 ### 6 Deploy Application
 The next step is to deploy the Flask application. The **[Applications](https://docs.cloudera.com/machine-learning/cloud/applications/topics/ml-applications.html)** feature is still quite new for CML. For this project it is used to deploy a web based application that interacts with the underlying model created in the previous step.
